@@ -1,0 +1,27 @@
+@model List<Ky2_2019_2020.Models.CongNhanModel>
+
+<table border="1">
+    <tr>
+        <th>Mã công nhân</th>
+        <th>Tên công nhân</th>
+        <th>Chức năng</th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.GetType().GetProperty("MaCongNhan").GetValue(item, null)
+            </td>
+            <td>
+                @item.GetType().GetProperty("TenCongNhan").GetValue(item, null)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-maCongNhan="@item.MaCongNhan">
+                    Delete
+                </a>
+                <a asp-action="Details" asp-route-maCongNhan="@item.MaCongNhan">
+                    View
+                </a>
+            </td>
+        </tr>
+    }
+</table>

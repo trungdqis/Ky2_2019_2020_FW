@@ -1,0 +1,16 @@
+@model Ky2_2019_2020.Models.CongNhanModel
+
+<label>Mã công nhân</label>
+<input type="text" name="MaCongNhan" value="@Model.MaCongNhan" readonly />
+</br>
+<label>Tên công nhân</label>
+<input type="text" name="TenCongNhan" value="@Model.TenCongNhan" readonly />
+</br>
+<label>Giới tính</label>
+<input type="checkbox" name="GioiTinh" checked="@Model.GioiTinh" disabled />
+</br>
+<label>Năm sinh</label>
+<input type="number" name="NamSinh" value="@Model.NamSinh" readonly />
+</br>
+<label>Nước về</label>
+<input type="text" name="NuocVe" value="@Model.NuocVe" readonly />

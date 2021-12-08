@@ -1,0 +1,62 @@
+﻿CREATE DATABASE CACHLYCOVID_DB;
+USE CACHLYCOVID_DB;
+
+CREATE TABLE DIEMCACHLY (
+	MaDiemCachLy VARCHAR(20) PRIMARY KEY,
+	TenDiemCachLy NVARCHAR(64) NOT NULL,
+	DiaChi NVARCHAR(126) NOT NULL
+);
+
+CREATE TABLE TRIEUCHUNG (
+	MaTrieuChung VARCHAR(20) PRIMARY KEY, 
+	TenTrieuChung NVARCHAR(64) NOT NULL
+);
+
+CREATE TABLE CONGNHAN (
+	MaCongNhan VARCHAR(20) PRIMARY KEY,
+	TenCongNhan NVARCHAR(64) NOT NULL,
+	GioiTinh TINYINT,
+	NamSinh INT,
+	NuocVe NVARCHAR(32),
+	MaDiemCachLy VARCHAR(20),
+	FOREIGN KEY (MaDiemCachLy) REFERENCES DIEMCACHLY(MaDiemCachLy)
+);
+
+CREATE TABLE CN_TC (
+	MaCongNhan VARCHAR(20), 
+	MaTrieuChung VARCHAR(20),
+	PRIMARY KEY (MaCongNhan, MaTrieuChung),
+	FOREIGN KEY (MaCongNhan) REFERENCES CONGNHAN(MaCongNhan),
+	FOREIGN KEY (MaTrieuChung) REFERENCES TRIEUCHUNG(MaTrieuChung)
+)
+
+-- DIEMCACHLY
+INSERT INTO DIEMCACHLY(MaDiemCachLy, TenDiemCachLy, DiaChi) VALUES ('DCL001', N'THPT Dầu Tiếng', N'Dầu Tiếng - Bình Dương');
+INSERT INTO DIEMCACHLY(MaDiemCachLy, TenDiemCachLy, DiaChi) VALUES ('DCL002', N'Ký túc xá ĐHQG', N'Dĩ An - Bình Dương');
+INSERT INTO DIEMCACHLY(MaDiemCachLy, TenDiemCachLy, DiaChi) VALUES ('DCL003', N'BV Quận 9', N'Quận 9 - TP Thủ Đức');
+INSERT INTO DIEMCACHLY(MaDiemCachLy, TenDiemCachLy, DiaChi) VALUES ('DCL004', N'Trạm y Tế xã Định An', N'Định An - Dầu Tiếng');
+INSERT INTO DIEMCACHLY(MaDiemCachLy, TenDiemCachLy, DiaChi) VALUES ('DCL005', N'BV Quốc tế Becamex', N'Thuận An - Bình Dương');
+-- CONGNHAN
+SET DATEFORMAT dmy;
+INSERT INTO CONGNHAN(MaCongNhan, TenCongNhan, GioiTinh, NamSinh, NuocVe, MaDiemCachLy) VALUES ('CN001', N'Quốc Trung', 1, 2001, N'Úc', 'DCL005');
+INSERT INTO CONGNHAN(MaCongNhan, TenCongNhan, GioiTinh, NamSinh, NuocVe, MaDiemCachLy) VALUES ('CN002', N'Ngọc Trang', 0, 2001, N'Mỹ', 'DCL002');
+INSERT INTO CONGNHAN(MaCongNhan, TenCongNhan, GioiTinh, NamSinh, NuocVe, MaDiemCachLy) VALUES ('CN003', N'Công Vũ', 1, 2001, N'Ai Cập', 'DCL002');
+INSERT INTO CONGNHAN(MaCongNhan, TenCongNhan, GioiTinh, NamSinh, NuocVe, MaDiemCachLy) VALUES ('CN004', N'Tấn Thịnh', 1, 2001, N'Triều Tiên', 'DCL003');
+INSERT INTO CONGNHAN(MaCongNhan, TenCongNhan, GioiTinh, NamSinh, NuocVe, MaDiemCachLy) VALUES ('CN005', N'Thanh Vũ', 1, 2001, N'Hàn Quốc', 'DCL005');
+
+-- TRIEUCHUNG
+INSERT INTO TRIEUCHUNG VALUES ('TC001', N'Sốt');
+INSERT INTO TRIEUCHUNG VALUES ('TC002', N'Ho');
+INSERT INTO TRIEUCHUNG VALUES ('TC003', N'Sổ mũi');
+INSERT INTO TRIEUCHUNG VALUES ('TC004', N'Mất vị');
+INSERT INTO TRIEUCHUNG VALUES ('TC005', N'Đau cổ');
+-- CN_TC
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN001', 'TC001');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN001', 'TC003');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN002', 'TC004');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN003', 'TC002');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN003', 'TC003');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN003', 'TC005');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN004', 'TC005');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN004', 'TC001');
+INSERT INTO CN_TC(MaCongNhan, MaTrieuChung) VALUES ('CN005', 'TC002');
